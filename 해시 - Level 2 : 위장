@@ -1,0 +1,17 @@
+
+# 해시 - Level 2 : 위장
+
+# 내 풀이
+def solution(clothes):
+    arr = {}
+    result = 1
+    for _, i in clothes:
+        if i not in arr:
+            arr[i] = 2        
+        else:
+            arr[i] = arr[i] + 1
+            
+    for i in arr:
+        result *= arr[i]
+        
+    return result-1
