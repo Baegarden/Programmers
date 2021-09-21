@@ -1,0 +1,25 @@
+   
+# 스택, 큐 - Level 2 : 기능 개발
+
+# 내 풀이
+import math
+from collections import deque
+
+def solution(progresses, speeds):
+    N = len(progresses)
+    arr = deque()
+    for i in range(N):
+        arr.append(math.ceil((100-progresses[i])/speeds[i]))
+    
+    result = [1]
+    num = arr.popleft()
+    head = 0
+    for i in range(N-1):
+        num2 = arr.popleft()
+        if num >= num2:
+            result[head] += 1
+        else:
+            result.append(1)
+            num = num2
+            head += 1          
+    return result
