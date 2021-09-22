@@ -1,0 +1,24 @@
+ # 스택, 큐 - Level 2 : 프린터
+
+# 내 풀이
+from collections import deque
+
+def solution(priorities, location):
+    p = deque()
+    arr = deque()
+    for i in range(len(priorities)):
+        p.append(priorities[i])
+        arr.append(i+1)
+
+    target = arr[location]
+    count = 0 
+    while True:
+        if max(p) == p[0]:
+            count += 1
+            if arr[0] == target:
+                return count
+            p.popleft()
+            arr.popleft()
+        else:
+            p.append(p.popleft())
+            arr.append(arr.popleft())
