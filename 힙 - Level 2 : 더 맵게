@@ -1,0 +1,20 @@
+# 힙 - Level 2 : 더 맵게
+
+# 내 풀이
+import heapq
+
+def solution(scoville, K):
+    heapq.heapify(scoville)      
+    answer = 0
+    while len(scoville) != 1:
+        answer += 1
+        newscoville = 0
+        for i in range(2):
+            if i == 0:
+                newscoville += heapq.heappop(scoville)
+            else:
+                newscoville += heapq.heappop(scoville) * 2
+        heapq.heappush(scoville, newscoville)
+        if scoville[0] > K:
+            return answer  
+    return -1
