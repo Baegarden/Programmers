@@ -1,0 +1,16 @@
+# 정렬 - Level 2 : H-Index
+
+def solution(citations):
+    n  = len(citations)
+    citations.sort()
+    answer = 0
+    for i in range(n):
+        flag = 1
+        answer = n - i
+        for j in range(i, n):
+            if citations[j] < answer:
+                flag = 0
+                break
+        if flag == 1:
+            return answer
+    return 0
