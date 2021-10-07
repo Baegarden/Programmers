@@ -1,0 +1,17 @@
+# 그리디 - Level 2 : 조이스틱
+
+def solution(name):
+    answer = 0
+    min_move = len(name) - 1    # 오른쪽으로만 이동했을경우
+    next = 0                     
+
+    for i, char in enumerate(name):
+        answer += min(ord(char) - ord('A'), ord('A') + 26 - ord(char))    # 알파벳 최소 변경횟수
+
+        next = i + 1
+        while next < len(name) and name[next] == 'A':
+            next += 1
+
+        min_move = min(min_move, i + i + len(name) - next)  # 왼쪽으로 이동했을경우와 비교
+    answer += min_move
+    return answer
