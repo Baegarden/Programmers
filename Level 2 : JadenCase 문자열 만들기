@@ -1,0 +1,10 @@
+# Level 2 : JadenCase 문자열 만들기
+
+def solution(s):
+    arr = list(map(str, s.split(" ")))
+    arr2 = []
+    for i in arr:
+        j = i.lower()
+        arr2.append(j.capitalize())
+    answer = " ".join(arr2)
+    return answer
