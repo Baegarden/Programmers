@@ -1,0 +1,16 @@
+# Level 2 : 숫자의 표현
+
+def solution(n):
+    answer = 0
+    for i in range(1, n+1):
+        sumNum = 0
+        j = i
+        while True:
+            sumNum += j
+            if sumNum > n:
+                break
+            elif sumNum == n:
+                answer += 1
+                break  
+            j += 1           
+    return answer
