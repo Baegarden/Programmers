@@ -1,0 +1,9 @@
+# Level 2 : 다음 큰 숫자
+
+def solution(n):
+    i = bin(n).count('1')
+    m = n + 1
+    while True:
+        if bin(m).count('1') == i:
+            return m
+        m += 1
