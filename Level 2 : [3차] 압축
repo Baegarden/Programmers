@@ -1,0 +1,22 @@
+# Level 2 : [3차] 압축
+
+import string
+
+def solution(msg):
+    dc = [i for i in string.ascii_uppercase]
+    answer = []
+    nextIndex = 0
+    for i in range(len(msg)):
+        if i == nextIndex:
+            w, c = '', ''
+            w = msg[i]
+            for j in range(1, len(msg)-i):
+                c = msg[i+j]
+                s = w + c
+                if s not in dc:
+                    nextIndex = i + j
+                    break
+                w = s
+            dc.append(w+c)
+            answer.append(dc.index(w)+1)   
+    return answer
