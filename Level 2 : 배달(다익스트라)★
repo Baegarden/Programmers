@@ -1,0 +1,33 @@
+# Level 2 : 배달(다익스트라)
+
+import heapq, sys
+
+def bfs(arr, distance):
+    heap = []
+    heapq.heappush(heap, [0, 1])
+
+    while heap:
+        weight, node = heapq.heappop(heap)
+        for c, n in arr[node]:
+            if weight + c < distance[n]:
+                distance[n] = weight + c
+                heapq.heappush(heap, [weight + c, n])
+
+def solution(N, road, K):
+    arr = [[] for i in range(N+1)]
+    INF = sys.maxsize
+    distance = [INF] * (N+1)
+    distance[1] = 0
+
+    for i in road:
+        arr[i[0]].append([i[2], i[1]])
+        arr[i[1]].append([i[2], i[0]])
+
+    bfs(arr, distance)
+
+    answer = 0
+    for i in distance:
+        if i <= K:
+            answer += 1
+
+    return answer
