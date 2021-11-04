@@ -1,0 +1,11 @@
+# Level 1 : 예산
+
+def solution(d, budget):
+    answer, sumNum = 0, 0
+    while True:
+        if sumNum > budget:
+            break
+        sumNum += min(d)
+        answer += 1
+        d[d.index(min(d))] = budget
+    return answer-1
