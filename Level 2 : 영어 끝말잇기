@@ -1,0 +1,22 @@
+# Level 2 : 영어 끝말잇기
+
+def solution(n, words):
+    answer, arr = [], []
+    pre = words[0][0]
+
+    for i, j in enumerate(words):
+        if j in arr or pre[len(pre)-1] != j[0]:
+            if (i+1)%n == 0:
+                answer.append(n)
+            else:
+                answer.append((i+1)%n)
+            answer.append((i//n)+1)
+            break
+        else:
+            arr.append(j)
+            pre = j
+
+    if answer:
+        return answer
+    else:
+        return [0, 0]
