@@ -1,0 +1,27 @@
+# Level 2 : 방문 길이
+
+def solution(dirs):
+    answer = 0
+    arr = []
+    x, y = 0, 0
+    for i in dirs:
+        if i == 'U':
+            tmpX, tmpY = x, y + 1
+        elif i == 'D':
+            tmpX, tmpY = x, y - 1
+        elif i == 'R':
+            tmpX, tmpY = x + 1, y
+        elif i == 'L':
+            tmpX, tmpY = x - 1, y
+
+        if tmpX > 5 or tmpX < -5 or tmpY > 5 or tmpY < -5:
+            continue
+
+        if [x, y, tmpX, tmpY] not in arr:
+            arr.append([x, y, tmpX, tmpY])
+            arr.append([tmpX, tmpY, x, y])
+            answer += 1  
+
+        x, y = tmpX, tmpY 
+
+    return answer
