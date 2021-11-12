@@ -3,30 +3,21 @@
 from itertools import permutations
 
 def isTrue(N):
-    n = 2
-    while n < N:
-        if N % n == 0:
+    for i in range(2, N):
+        if N % i == 0:
             return False
-        n += 1
     return True
     
 def solution(numbers):
-    answer = 0
-    arr = []
-    for i in range(len(numbers)):
-        arr.append(numbers[i])
-        
-    arr2 = []     
+    arr = list(map(str, numbers))
+    answer = set()
     for i in range(1, len(numbers)+1):
         for j in permutations(arr, i):
-            arr2.append(int("".join(j)))
-            
-    arr3 = list(set(arr2))   
-    for i in arr3:
-        if i > 1 and isTrue(i):
-            answer += 1        
-    return answer
-
+            num = int("".join(j))
+            if num > 1:
+                if isTrue(num):
+                    answer.add(num)
+    return len(answer)
 
 # 다른사람 풀이(재귀)
 primeSet = set()
