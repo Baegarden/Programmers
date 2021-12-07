@@ -1,0 +1,13 @@
+# Level 2 : 이진 변환 반복하기
+
+def solution(s):
+    arr = [0, 0]
+    while s != "1":
+        n = len(s) 
+        for i in s:
+            if i == "0":
+                arr[1] += 1
+                n -= 1
+        s = bin(n)[2:]
+        arr[0] += 1
+    return arr
