@@ -1,0 +1,28 @@
+# Level 2 : 전력망을 둘로 나누기
+
+from collections import deque
+
+def bfs(arr):
+    visited = [1]
+    queue = deque()
+    queue.append(1)
+    while queue:
+        x = queue.popleft()
+        for i in range(1, len(arr)):
+            if arr[x][i] == 1 and i not in visited:
+                visited.append(i)
+                queue.append(i)
+    return len(visited)
+    
+def solution(n, wires):
+    anwser = n
+    for i in range(len(wires)):
+        arr = [[0 for i in range(n+1)] for i in range(n+1)]
+        for j, k in enumerate(wires):
+            if i != j:    
+                arr[k[0]][k[1]] = 1
+                arr[k[1]][k[0]] = 1    
+        tmpNum = bfs(arr)
+        if abs((n - tmpNum) - tmpNum) < anwser:
+            anwser = abs((n - tmpNum) - tmpNum)                                           
+    return anwser
