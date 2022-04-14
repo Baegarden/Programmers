@@ -1,0 +1,57 @@
+# Level 2 : 주차 요금 계산
+
+import math
+
+def solution(fees, records):
+    carDict = {}
+    result = {}
+    
+    for i in records:
+        time, carNum, state = i.split()
+        if carNum not in carDict:  # 입차
+            carDict[carNum] = time
+        else:                   # 출차
+            inTime, outTime = carDict[carNum], time
+            del carDict[carNum]
+            
+            inHour, inMinute = inTime.split(':')
+            outHour, outMinute = outTime.split(':')
+            sumHour = int(outHour) - int(inHour)
+            sumMinute = int(outMinute) - int(inMinute)
+            sumTime = sumHour * 60 + sumMinute
+            
+            if carNum not in result:
+                result[carNum] = sumTime
+            else:
+                result[carNum] += sumTime
+    
+    if list(carDict.keys()):
+        for carNum in list(carDict.keys()):
+            inTime, outTime = carDict[carNum], '23:59'
+            inHour, inMinute = inTime.split(':')
+            outHour, outMinute = outTime.split(':')
+            sumHour = int(outHour) - int(inHour)
+            sumMinute = int(outMinute) - int(inMinute)
+            sumTime = sumHour * 60 + sumMinute
+            
+            if carNum not in result:
+                result[carNum] = sumTime
+            else:
+                result[carNum] += sumTime
+            
+    for carNum in list(result.keys()):
+        sumTime = result[carNum]
+        if sumTime <= fees[0]:
+            fee = fees[1]
+        else:
+            fee = fees[1] + (math.ceil(((sumTime - fees[0]) / fees[2])) * fees[3])   
+        result[carNum] = fee
+    
+    answer = []
+    tmp = list(result.keys())
+    tmp2 = sorted(tmp, key=lambda x: int(x))
+
+    for carNum in tmp2:
+        answer.append(result[carNum])
+    
+    return answer
