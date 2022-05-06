@@ -1,0 +1,17 @@
+Level 2 : 튜플
+
+def solution(s):
+    s = s[2:-2]
+    sArr = list(s.split("},{"))
+    arr = []
+    for i in sArr:
+        arr.append(list(map(int, i.split(","))))
+    arr = sorted(arr, key=lambda x:len(x))
+    
+    answer = []
+    for i in arr:
+        for j in i:
+            if j not in answer:
+                answer.append(j)
+                
+    return answer
